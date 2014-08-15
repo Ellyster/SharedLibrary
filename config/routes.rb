@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  resources :reviews
+
+  resources :users
+
+  resources :rindokus
+
+  resources :categories
+
+  resources :languages
+
+  resources :topics
+
+  resources :books
+
+  resources :owners
+
+  resources :locations
+
+  resources :publishers
+
+  resources :authors
+
+  resources :copies
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

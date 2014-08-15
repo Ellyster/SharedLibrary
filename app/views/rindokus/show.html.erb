@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @rindoku.year %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @rindoku.semester %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @rindoku.book_id %>
+</p>
+
+<%= link_to 'Edit', edit_rindoku_path(@rindoku) %> |
+<%= link_to 'Back', rindokus_path %>

@@ -1,0 +1,29 @@
+<h1>Listing rindokus</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Semester</th>
+      <th>Book</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rindokus.each do |rindoku| %>
+      <tr>
+        <td><%= rindoku.year %></td>
+        <td><%= rindoku.semester %></td>
+        <td><%= rindoku.book_id %></td>
+        <td><%= link_to 'Show', rindoku %></td>
+        <td><%= link_to 'Edit', edit_rindoku_path(rindoku) %></td>
+        <td><%= link_to 'Destroy', rindoku, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rindoku', new_rindoku_path %>

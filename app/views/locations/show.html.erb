@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @location.room %>
+</p>
+
+<p>
+  <strong>Bookshelf:</strong>
+  <%= @location.bookshelf %>
+</p>
+
+<p>
+  <strong>Shelf:</strong>
+  <%= @location.shelf %>
+</p>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

@@ -20,9 +20,12 @@ ActiveRecord::Schema.define(version: 20140815015600) do
   end
 
   create_table "authors_books", id: false, force: true do |t|
-    t.integer "author_id_id"
-    t.integer "book_id_id"
+    t.integer "author_id", null: false
+    t.integer "book_id",   null: false
   end
+
+  add_index "authors_books", ["author_id", "book_id"], name: "index_authors_books_on_author_id_and_book_id", unique: true
+  add_index "authors_books", ["book_id", "author_id"], name: "index_authors_books_on_book_id_and_author_id", unique: true
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -34,9 +37,12 @@ ActiveRecord::Schema.define(version: 20140815015600) do
   end
 
   create_table "books_topics", id: false, force: true do |t|
-    t.integer "book_id_id"
-    t.integer "topic_id_id"
+    t.integer "book_id",  null: false
+    t.integer "topic_id", null: false
   end
+
+  add_index "books_topics", ["book_id", "topic_id"], name: "index_books_topics_on_book_id_and_topic_id", unique: true
+  add_index "books_topics", ["topic_id", "book_id"], name: "index_books_topics_on_topic_id_and_book_id", unique: true
 
   create_table "categories", force: true do |t|
     t.string   "name"

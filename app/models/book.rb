@@ -1,10 +1,10 @@
 class Book < ActiveRecord::Base
-  has_many :copies
   belongs_to :publisher
   belongs_to :language
-  has_and_belongs_to_many :autors
-  has_and_belongs_to_many :topics
+  has_many :copies
   has_many :rindokus
-  has many :reviews
+  has_many :reviews
+  has_and_belongs_to_many :autors, :uniq => true
+  has_and_belongs_to_many :topics, :uniq => true
 
 end

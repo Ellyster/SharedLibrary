@@ -3,12 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>Book</th>
-      <th>Isbn</th>
       <th>Edition</th>
-      <th>Amazon</th>
       <th>Location</th>
       <th>Owner</th>
+      <th>Lost</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,12 +14,10 @@
   <tbody>
     <% @copies.each do |copy| %>
       <tr>
-        <td><%= copy.book_id %></td>
-        <td><%= copy.isbn %></td>
-        <td><%= copy.edition %></td>
-        <td><%= copy.amazon_id %></td>
+        <td><%= copy.edition_id %></td>
         <td><%= copy.location_id %></td>
         <td><%= copy.owner_id %></td>
+        <td><%= copy.lost %></td>
         <td><%= link_to 'Show', copy %></td>
         <td><%= link_to 'Edit', edit_copy_path(copy) %></td>
         <td><%= link_to 'Destroy', copy, method: :delete, data: { confirm: 'Are you sure?' } %></td>

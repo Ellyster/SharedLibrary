@@ -1,3 +1,113 @@
 // Place all the styles related to the Books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// All book pages
+h3 { margin-top: 0; }
+
+.rating { max-width: 97px; font-size: 1.8em; padding-top:8px; }
+.rating-5 .rating { color:#5cb85c; }
+.rating-4 .rating { color:#5cb85c; }
+.rating-3 .rating { color:#f0ad4e; }
+.rating-2 .rating { color:#f0ad4e; }
+.rating-1 .rating { color:#d9534f; }
+.rating-0 .rating { color:#d9534f; }
+.rating-no-score .rating { color:#0000ff; }
+
+.col-sm-8 li { padding-bottom: 1em; }
+
+.book-form {
+  display: none;
+}
+
+.no-results-holder {
+  padding-left:  1em;
+}
+
+// Book index (only)
+// Categories
+.categories-list .topic-holder {
+  margin-bottom: 0.1em;
+  display: inline-block;
+}
+
+
+// Book show (only)
+// Book details
+.book-details {
+  padding-top: 1em;
+}
+
+.book-details .big-rating { max-width: 97px; font-size: 3.2em; padding-top:8px; }
+.book-details .rating-5 .big-rating { color:#5cb85c; }
+.book-details .rating-4 .big-rating { color:#5cb85c; }
+.book-details .rating-3 .big-rating { color:#f0ad4e; }
+.book-details .rating-2 .big-rating { color:#f0ad4e; }
+.book-details .rating-1 .big-rating { color:#d9534f; }
+.book-details .rating-0 .big-rating { color:#d9534f; }
+.book-details .rating-no-score .big-rating { color:#0000ff; }
+
+.book-details .big-score-holder {
+  padding-top: 2.5em;
+}
+
+.book-details .title-tags {
+  padding-left: 2em;
+  display: inline-block;
+}
+
+.book-details .topic-holder {
+  margin-bottom: 0.1em;
+  display: inline-block;
+}
+
+.book-details .editions-reviews {
+  padding-top: 25em;
+}
+
+// Copies tab
+
+.editions-list {
+  padding-top:  1em;
+}
+
+.editions-list .edition {
+  padding-bottom:  1em;
+}
+
+.editions-list .cover-img-holder {
+  padding-top:  0.5em;
+  padding-left: 3em;
+}
+
+.editions-list .copies-list {
+  padding-top:  1.5em;
+}
+
+.editions-list .copy-holder {
+  margin-bottom: 0.1em;
+  display: inline-block;
+}
+
+// Reviews tab
+
+.reviews-list {
+  padding-top:  1em;
+}
+
+.reviews-list .review {
+  padding-bottom:  1em;
+}
+
+.reviews-list .avatar-holder {
+  padding-top:  1.5em;
+  padding-left: 3em;
+}
+
+.reviews-list .blockquote-holder {
+  padding-left: 1em;
+}
+
+.reviews-list .score-holder {
+  padding-top:  2.5em;
+}

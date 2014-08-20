@@ -6,7 +6,6 @@ one:
   email: MyString
   encrypted_password: MyString
   salt: MyString
-  avatar: MyString
   librarian: false
   admin: false
 
@@ -16,6 +15,5 @@ two:
   email: MyString
   encrypted_password: MyString
   salt: MyString
-  avatar: MyString
   librarian: false
   admin: false

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :editions
+
   resources :reviews
 
   resources :users
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
   resources :authors
 
   resources :copies
+
+  root 'books#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

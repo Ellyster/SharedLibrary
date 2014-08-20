@@ -1,24 +1,171 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+  <div class="book-details">
+    <div class="col-sm-12">
+      <div class="row rating-<%= @book.score(is_css: true) %>">
 
-<p>
-  <strong>Paperback:</strong>
-  <%= @book.paperback %>
-</p>
+        <div class="col-sm-2">
+          <%= link_to image_from_amazon(@book.amazon_id, big: true), book_path(@book) %>
+        </div>
 
-<p>
-  <strong>Publisher:</strong>
-  <%= @book.publisher_id %>
-</p>
+        <div class="col-sm-8">
+          <h3>
+            <%= link_to @book.title, book_path(@book) %>
+            <div class="title-tags">
+              <%= link_to @book.language.name, books_path(language: @book.language.name), class: 'label label-info' %>
+              <%= (link_to "New", books_path(recent: true), class: 'label label-danger') if @book.is_recent? %>
+            </div>
+          </h3>
+          <p class="text-muted">
+            <em>Written by <%= @book.authors.map{ |author| author.name }.to_sentence %></em>
+            <br><em>Published by <%= @book.publisher.name %></em>
+          </p>
 
-<p>
-  <strong>Language:</strong>
-  <%= @book.language_id %>
-</p>
 
+          <div>
+            <p>
+              <% @book.topics.each do |topic| %>
+              <div class='topic-holder'>
+                <%= link_to topic.name, books_path(filter: topic.name), class: 'label label-primary' %>
+              </div>
+              <% end %>
+
+              <% @book.rindokus.each do |rindoku| %>
+              <div class='topic-holder'>
+                <%= link_to "#{rindoku.year} - #{rindoku.semester}", book_path(@book), class: 'label label-success' %>
+              </div>
+              <% end %>
+            </p>
+          </div>
+
+
+          <div>
+            <p>
+              <%= @book.blurb %>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="big-score-holder">
+            <p class="text-center big-rating"><strong><%= @book.score(with_rounding: true) %></strong>/5</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="editions-reviews">
+      <div col-sm-12>
+        <ul class="nav nav-tabs">
+          <li class="<%= 'active' unless params[:tab] == '1' %>">
+            <%= link_to "Copies", book_path(@book, tab: "0") %>
+          </li>
+          <li class="<%= 'active' if params[:tab] == '1' %>">
+            <%= link_to "Reviews", book_path(@book, tab: "1") %>
+          </li>
+        </ul>
+
+        <% unless params[:tab] == '1' %>
+
+          <ul class="list-unstyled editions-list">
+
+            <% if !@book.has_active_copies? %>
+
+              <div class="no-results-holder">
+                <p class="text-muted"><em>
+                  There are no copies of this book at the moment.
+                </em></p>
+              </div>
+
+            <% else %>
+
+              <!--%= render @books.editions %-->
+              <% @book.editions.each do |edition| %>
+                <% if edition.has_active_copies? %>
+                  <li class="row edition">
+                    <div class="col-sm-2">
+                      <div class="cover-img-holder">
+                        <%= link_to image_from_amazon(edition.amazon_id,), book_path(@book) %>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                      <h3><%= "#{edition.edition}#{edition.edition.ordinal} edition" %></h3>
+                      <p class="text-muted">
+                        <em>ISBN-13: <%= edition.isbn13 %></em>
+                        <br><em><%= edition.cover %></em>
+                      </p>
+                    </div>
+
+                    <div class="col-sm-7">
+                      <div class="list-unstyled copies-list" >
+
+                        <% edition.copies.each do |copy| %>
+                        <div class="copy-holder">
+                          <%= link_to "#{copy.owner.label}#{copy.id} - Room: #{copy.location.room} Bookshelf: #{copy.location.bookshelf} Shelf: #{copy.location.shelf}", "#", class: "label label-default" %>
+                        </div>
+                        <% end %>
+
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              <% end %>
+
+            <% end %>
+
+          </ul>
+
+        <% else %>
+
+          <ul class="list-unstyled reviews-list">
+
+            <% if @book.reviews.count == 0 %>
+
+              <div class="no-results-holder">
+                <p class="text-muted"><em>
+                  There are no reviews for this book yet.
+                </em></p>
+              </div>
+
+            <% else %>
+
+              <!--%= render @books.reviews %-->
+              <% @book.reviews.each do |review| %>
+                <li class="row review rating-<%= @book.score(is_css: true) %>">
+                  <div class="col-sm-2">
+                    <div class="avatar-holder">
+                      <%= image_tag review.user.gravatar_url, class: "avatar" %>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-7">
+                    <h3><%= review.user.name %></h3>
+                      <div class="blockquote-holder">
+                        <blockquote><%= review.comment %></blockquote>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                      <div class="score-holder rating-<%= review.score %>">
+                        <p class="text-center rating"><strong><%= review.score %></strong>/5</p>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+
+              <% end %>
+
+            </ul>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
+-->

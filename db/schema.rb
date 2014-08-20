@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20140815015600) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
+    t.string   "keywords"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,9 +30,10 @@ ActiveRecord::Schema.define(version: 20140815015600) do
 
   create_table "books", force: true do |t|
     t.string   "title"
-    t.text     "paperback"
+    t.text     "blurb"
     t.integer  "publisher_id"
     t.integer  "language_id"
+    t.text     "keywords"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,12 +53,20 @@ ActiveRecord::Schema.define(version: 20140815015600) do
   end
 
   create_table "copies", force: true do |t|
-    t.integer  "book_id"
-    t.string   "isbn"
-    t.integer  "edition"
-    t.string   "amazon_id"
+    t.integer  "edition_id"
     t.string   "location_id"
     t.string   "owner_id"
+    t.boolean  "lost",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "editions", force: true do |t|
+    t.integer  "book_id"
+    t.string   "isbn13"
+    t.integer  "edition"
+    t.string   "cover"
+    t.string   "amazon_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,7 +108,7 @@ ActiveRecord::Schema.define(version: 20140815015600) do
   end
 
   create_table "rindokus", force: true do |t|
-    t.date     "year"
+    t.integer  "year"
     t.string   "semester"
     t.integer  "book_id"
     t.datetime "created_at"
@@ -118,9 +128,8 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.string   "avatar"
-    t.boolean  "librarian"
-    t.boolean  "admin"
+    t.boolean  "librarian",          default: false
+    t.boolean  "admin",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

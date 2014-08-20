@@ -6,9 +6,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :encrypted_password
       t.string :salt
-      t.string :avatar
-      t.boolean :librarian
-      t.boolean :admin
+      t.boolean :librarian, :default => false
+      t.boolean :admin, :default => false
 
       t.timestamps
     end

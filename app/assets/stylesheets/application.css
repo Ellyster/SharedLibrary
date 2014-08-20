@@ -11,5 +11,33 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require bootstrap
+ *= require font-awesome
  *= require_self
  */
+
+.navbar-brand-icon {
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border: ;
+  margin-top: 0.3em !important;
+  margin-left: 0.5em !important;
+  display: inline;
+}
+
+.avatar {
+  border: 1px solid white;
+  border-radius: 45px;
+  box-shadow: 1px 1px 1px rgba(0,0,0, 0.7);
+  display: block;
+  height: 90px;
+  width: 90px;
+}
+
+.avatar img {
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 45px; /* must be width + border */
+  width: 80px;
+  height: 80px;
+}

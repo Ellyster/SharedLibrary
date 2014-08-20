@@ -1,10 +1,133 @@
+<div class="container">
+
+
+  <div class='row'>
+    <div class='col-sm-12'>
+      <p>
+        <form>
+          <legend>Search</legend>
+          <div class='col-xs-4'>
+            <input type='text' class='form-control' value='<%= params[:keyword] %>' name='keyword' placeholder='Keyword' >
+          </div>
+        </form>
+      </p>
+      <!--<p class='pull-right'>
+        <a href='#' id='show-form' class='btn btn-primary'>New Book Form</a>
+      </p>-->
+    </div>
+  </div>
+
+  <br>
+  <hr>
+
+
+<!--  <div class='col-sm-12 book-form'>
+    <p>
+      <= form_for(Book.new, remote: true,
+                   html: { class: 'horizontal-form' }) do |f| >
+      <legend>New Book</legend>
+
+      <div class='col-sm-5'>
+        <div class='form-group'>
+
+          <label><strong>Genre</strong></label>
+
+          < @genres.each do |genre| >
+            <div class="checkbox">
+              <label>
+                <= check_box_tag 'book[genre_ids][]', genre.id > <= genre.name >
+              </label>
+            </div>
+          < end >
+        </div>
+
+        <br>
+
+        <div class='form-group'>
+          <= f.text_field :title, class: 'form-control', placeholder: 'Title' >
+        </div>
+        <div class='form-group'>
+          <= f.text_field :author, class: 'form-control', placeholder: 'Author' >
+        </div>
+        <div class='form-group'>
+          <= f.text_field :description, class: 'form-control', placeholder: 'Description' >
+        </div>
+        <div class='form-group'>
+          <= f.text_field :amazon_id, class: 'form-control', placeholder: 'Amazon ID' >
+        </div>
+
+        <div class='form-group'>
+          <legend>Rating</legend>
+          < (1..5).each do |rating| >
+            <label class='radio-inline'>
+              <= rating ><= f.radio_button :rating, rating >
+            </label>
+          < end >
+        </div>
+
+        <div class='form-group'>
+          <= f.submit class: 'btn btn-primary' >
+        </div>
+      </div>
+      < end >
+    </p>
+  </div>
+-->
+
+  <div class="row">
+    <div class="col-sm-8">
+      <ul class="list-unstyled book-list">
+
+        <% if @books.count == 0 %>
+
+          <div class="no-results-holder">
+            <p class="text-muted"><em>
+              There are no books at the moment.
+            </em></p>
+          </div>
+
+        <% else %>
+
+          <%= render @books %>
+
+        <% end %>
+
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <% if @categories.any? {|c| c.has_books?} %>
+        <h2>Categories</h2>
+        <ul class="list-unstyled categories-list">
+          <% @categories.each do |category| %>
+            <% if category.has_books? %>
+              <li>
+                <h5><%= category.name %> <span class="badge"><%= category.books.count %></span></h5>
+                <div>
+                  <% category.topics.each do |topic| %>
+                    <div class="topic-holder">
+                      <%= (link_to topic.name, books_path(filter: topic.name), class: 'label label-primary') if topic.has_books? %>
+                    </div>
+                  <% end %>
+                </div>
+                <br>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!--
 <h1>Listing books</h1>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Paperback</th>
+      <th>Blurb</th>
       <th>Publisher</th>
       <th>Language</th>
       <th colspan="3"></th>
@@ -15,7 +138,7 @@
     <% @books.each do |book| %>
       <tr>
         <td><%= book.title %></td>
-        <td><%= book.paperback %></td>
+        <td><%= book.blurb %></td>
         <td><%= book.publisher_id %></td>
         <td><%= book.language_id %></td>
         <td><%= link_to 'Show', book %></td>
@@ -29,3 +152,4 @@
 <br>
 
 <%= link_to 'New Book', new_book_path %>
+-->

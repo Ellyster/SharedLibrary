@@ -8,7 +8,71 @@
 </head>
 <body>
 
+<div class="container">
+  <div class="site-header">
+    <h1>SharedLibrary</h1>
+
+    <div class="navbar navbar-default">
+      <a href="/">
+        <%= image_tag image_path(Settings.logo), class: "navbar-brand navbar-brand-icon" %>
+      </a>
+      <a class="navbar-brand" href="/">
+        <%= Settings.owner %>
+      </a>
+      <div class="navbar-inner">
+        <ul class="nav navbar-nav">
+          <li class="<%= 'active' if params[:controller] == 'books' %>">
+            <%= link_to "Books", books_path, class: 'active' %>
+          </li>
+          <li class="divider-vertical"></li>
+          <li class="<%= 'active' if params[:controller] == 'journals' %>">
+            <%= link_to "Journals", books_path %>
+          </li>
+          <li class="divider-vertical"></li>
+          <li class="<%= 'active' if params[:controller] == 'thesis' %>">
+            <%= link_to "Thesis", books_path %>
+          </li>
+        </ul>
+
+        <div class='pull-right'>
+          <!--<-% if logged in %->
+            Current user.name
+            <button type="button" class="btn btn-danger navbar-btn">Log out</button>
+          <-% else %->-->
+            <button type="button" class="btn btn-success navbar-btn">Log in</button>
+          <!--<-% end %->-->
+          &nbsp;&nbsp;&nbsp;
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="notice-holder">
+    <p id="notice"><%= notice %></p>
+  </div>
+</div>
+
 <%= yield %>
+
+<div class="container">
+  <div class="site-footer">
+    <br>
+    <hr>
+    <p class="text-muted text-center">
+      Created by
+      <a href="http://www-imai.is.s.u-tokyo.ac.jp/~alonso/index.html">Alonso Gragera</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Available on
+      <a href="http://ellyster.github.io/SharedLibrary/">GitHub <i class="fa fa-github"></i></a>
+      under
+      <a href="http://ellyster.github.io/SharedLibrary/">MIT License</a>
+      </p>
+  </div>
+</div>
 
 </body>
 </html>

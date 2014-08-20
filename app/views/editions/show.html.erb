@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @edition.book_id %>
+</p>
+
+<p>
+  <strong>Isbn13:</strong>
+  <%= @edition.isbn13 %>
+</p>
+
+<p>
+  <strong>Edition:</strong>
+  <%= @edition.edition %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @edition.cover %>
+</p>
+
+<p>
+  <strong>Amazon:</strong>
+  <%= @edition.amazon_id %>
+</p>
+
+<%= link_to 'Edit', edit_edition_path(@edition) %> |
+<%= link_to 'Back', editions_path %>

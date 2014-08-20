@@ -18,7 +18,7 @@ class CopiesControllerTest < ActionController::TestCase
 
   test "should create copy" do
     assert_difference('Copy.count') do
-      post :create, copy: { amazon_id: @copy.amazon_id, book_id: @copy.book_id, edition: @copy.edition, isbn: @copy.isbn, location_id: @copy.location_id, owner_id: @copy.owner_id }
+      post :create, copy: { edition_id: @copy.edition_id, location_id: @copy.location_id, owner_id: @copy.owner_id, lost: @copy.lost }
     end
 
     assert_redirected_to copy_path(assigns(:copy))
@@ -35,7 +35,7 @@ class CopiesControllerTest < ActionController::TestCase
   end
 
   test "should update copy" do
-    patch :update, id: @copy, copy: { amazon_id: @copy.amazon_id, book_id: @copy.book_id, edition: @copy.edition, isbn: @copy.isbn, location_id: @copy.location_id, owner_id: @copy.owner_id }
+    patch :update, id: @copy, copy: { edition_id: @copy.edition_id, location_id: @copy.location_id, owner_id: @copy.owner_id, lost: @copy.lost }
     assert_redirected_to copy_path(assigns(:copy))
   end
 

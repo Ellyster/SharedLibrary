@@ -1,23 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Book:</strong>
-  <%= @copy.book_id %>
-</p>
-
-<p>
-  <strong>Isbn:</strong>
-  <%= @copy.isbn %>
-</p>
-
-<p>
   <strong>Edition:</strong>
-  <%= @copy.edition %>
-</p>
-
-<p>
-  <strong>Amazon:</strong>
-  <%= @copy.amazon_id %>
+  <%= @copy.edition_id %>
 </p>
 
 <p>
@@ -28,6 +13,11 @@
 <p>
   <strong>Owner:</strong>
   <%= @copy.owner_id %>
+</p>
+
+<p>
+  <strong>Lost:</strong>
+  <%= @copy.lost %>
 </p>
 
 <%= link_to 'Edit', edit_copy_path(@copy) %> |

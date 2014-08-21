@@ -13,9 +13,11 @@
     <h1>SharedLibrary</h1>
 
     <div class="navbar navbar-default">
-      <a href="/">
-        <%= image_tag image_path(Settings.logo), class: "navbar-brand navbar-brand-icon" %>
-      </a>
+      <% unless Settings.logo == 'none' %>
+        <a href="/">
+          <%= image_tag image_path(Settings.logo), class: "navbar-brand navbar-brand-icon" %>
+        </a>
+      <% end %>
       <a class="navbar-brand" href="/">
         <%= Settings.owner %>
       </a>

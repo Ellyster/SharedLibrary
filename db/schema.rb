@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815015600) do
+ActiveRecord::Schema.define(version: 20140821014751) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -36,7 +36,13 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.text     "keywords"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "active_copies_count", default: 0,   null: false
+    t.integer  "reviews_count",       default: 0,   null: false
+    t.float    "score_avg",           default: 0.0, null: false
   end
+
+  add_index "books", ["language_id"], name: "index_books_on_language_id"
+  add_index "books", ["publisher_id"], name: "index_books_on_publisher_id"
 
   create_table "books_topics", id: false, force: true do |t|
     t.integer "book_id",  null: false
@@ -50,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "books_count", default: 0, null: false
   end
 
   create_table "copies", force: true do |t|
@@ -61,6 +68,10 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.datetime "updated_at"
   end
 
+  add_index "copies", ["edition_id"], name: "index_copies_on_edition_id"
+  add_index "copies", ["location_id"], name: "index_copies_on_location_id"
+  add_index "copies", ["owner_id"], name: "index_copies_on_owner_id"
+
   create_table "editions", force: true do |t|
     t.integer  "book_id"
     t.string   "isbn13"
@@ -69,7 +80,10 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.string   "amazon_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "active_copies_count", default: 0, null: false
   end
+
+  add_index "editions", ["book_id"], name: "index_editions_on_book_id"
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -107,6 +121,9 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.datetime "updated_at"
   end
 
+  add_index "reviews", ["book_id"], name: "index_reviews_on_book_id"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
+
   create_table "rindokus", force: true do |t|
     t.integer  "year"
     t.string   "semester"
@@ -120,7 +137,10 @@ ActiveRecord::Schema.define(version: 20140815015600) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "books_count", default: 0, null: false
   end
+
+  add_index "topics", ["category_id"], name: "index_topics_on_category_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

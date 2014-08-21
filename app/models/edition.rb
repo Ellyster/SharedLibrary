@@ -2,11 +2,6 @@ class Edition < ActiveRecord::Base
   belongs_to :book
   has_many :copies, dependent: :destroy
 
-  def has_active_copies?
-    return true if copies.any? {|copy| copy.lost == false}
-    return false
-  end
-
   validates :book_id,
             presence: true
 
@@ -19,4 +14,13 @@ class Edition < ActiveRecord::Base
   validates :cover,
             presence: true,
             inclusion: { in: %w(Hardback Paperback), message: "%{value} is not a valid covertype" }
+
+  def reset_active_copies_count
+    self.active_copies_count = copies.where(lost: false).count
+  end
+
+  def has_active_copies?
+    active_copies_count > 0
+  end
+
 end

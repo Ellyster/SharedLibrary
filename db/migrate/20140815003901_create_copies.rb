@@ -8,5 +8,9 @@ class CreateCopies < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :copies, :edition_id
+    add_index :copies, :owner_id
+    add_index :copies, :location_id
   end
 end

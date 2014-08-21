@@ -1,4 +1,10 @@
 # Basic configuration of SharedLibrary
 
+# Look customization
 owner: "A Lab"
-logo: "github.png" # PNG with no-background
+logo: "github.png"  # 40x40 PNG with no-background (must be placed in ./app/assets/images/)
+                    # or 'none' if you don't want any at all.
+
+# Extra types of publications that you want in your library (aside from books)
+journals: true
+thesis: true

@@ -9,5 +9,8 @@ class CreateBooks < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :books, :publisher_id
+    add_index :books, :language_id
   end
 end

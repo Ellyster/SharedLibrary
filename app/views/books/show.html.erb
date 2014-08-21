@@ -13,7 +13,7 @@
             <%= link_to @book.title, book_path(@book) %>
             <div class="title-tags">
               <%= link_to @book.language.name, books_path(language: @book.language.name), class: 'label label-info' %>
-              <%= (link_to "New", books_path(recent: true), class: 'label label-danger') if @book.is_recent? %>
+              <%= (link_to "New", books_path(recent: 30), class: 'label label-danger') if @book.is_recent? %>
             </div>
           </h3>
           <p class="text-muted">
@@ -80,7 +80,7 @@
             <% else %>
 
               <!--%= render @books.editions %-->
-              <% @book.editions.each do |edition| %>
+              <% @editions.each do |edition| %>
                 <% if edition.has_active_copies? %>
                   <li class="row edition">
                     <div class="col-sm-2">

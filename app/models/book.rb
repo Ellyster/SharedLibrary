@@ -2,14 +2,21 @@ class Book < ActiveRecord::Base
   belongs_to :publisher
   belongs_to :language
   has_many :editions, -> {order 'edition DESC'}, dependent: :destroy
-  has_many :rindokus, dependent: :destroy
+  has_many :rindokus, -> {order 'year ASC'}, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :authors, :uniq => true
   has_and_belongs_to_many :topics, -> {order 'name ASC'}, :uniq => true
 
   default_scope ->{order 'title ASC'}
+  scope :filter, ->(topic_name){joins(:topics).where('topics.name = ?', topic_name) if topic_name}
+  scope :recent, ->(days_amount){where('created_at >= ?', days_amount.to_i.days.ago) if days_amount}
 
   before_save :set_keywords
+
+  after_create :all_topics_reset_books_count
+  after_destroy :all_topics_reset_books_count
+  before_update :all_topics_reset_books_count
+  after_update :all_topics_reset_books_count
 
   validates :title,
             presence: true,
@@ -23,6 +30,28 @@ class Book < ActiveRecord::Base
 
   validates :language_id,
             presence: true
+
+  def all_topics_reset_books_count
+    self.topics.each(&:reset_books_count)
+    self.topics.each(&:save)
+
+    self.topics.each {|t| t.category.reset_books_count}
+    self.topics.each {|t| t.category.save}
+  end
+
+  def reset_reviews_count
+    self.reviews_count = reviews.count
+  end
+
+  def reset_avg_score
+    self.score_avg = reviews.average(:score)
+  end
+
+  def reset_active_copies_count
+    if editions.count > 0
+          self.active_copies_count = self.editions.each.map {|e| e.copies.where(lost: false).count}.reduce(:+)
+    end
+  end
 
   def self.search(keyword)
     if keyword.present?
@@ -60,28 +89,14 @@ class Book < ActiveRecord::Base
   end
 
   def has_active_copies?
-    return true if editions.any? {|edition| edition.has_active_copies?}
-    return false
-  end
-
-  def scored?
-    return true if reviews.count > 0
-    return false
+    active_copies_count > 0
   end
 
   def score(is_css: false, with_rounding: false)
 
-    if scored?
-      avgscore = 0.0
-
-      reviews.each do |review|
-        avgscore += review.score
-      end
-
-      avgscore /= reviews.count
-
-      return avgscore.round if with_rounding || is_css
-      return avgscore.round(2)
+    if reviews_count > 0
+      return score_avg.round if with_rounding || is_css
+      return score_avg.round(2)
     else
       return 'no-score' if is_css
       return '?'

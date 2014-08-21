@@ -101,7 +101,7 @@
           <% @categories.each do |category| %>
             <% if category.has_books? %>
               <li>
-                <h5><%= category.name %> <span class="badge"><%= category.books.count %></span></h5>
+                <h5><%= category.name %> <span class="badge"><%= category.books_count %></span></h5>
                 <div>
                   <% category.topics.each do |topic| %>
                     <div class="topic-holder">

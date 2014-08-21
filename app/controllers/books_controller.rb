@@ -4,14 +4,15 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.includes(:authors, :editions, :topics, :reviews).search(params[:keyword])
+    @books = Book.includes(:authors, :editions, :topics, :rindokus).search(params[:keyword]).filter(params[:filter]).recent(params[:recent])
     @categories = Category.includes(:topics).all
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-    @book = Book.includes(:authors, :editions, :topics, :reviews).find(params[:id])
+    @book = Book.includes(:authors, :topics, :rindokus, :reviews).find(params[:id])
+    @editions = Edition.includes(:copies, :copies => [:owner, :location]).where(book_id: params[:id])
   end
 
   # GET /books/new

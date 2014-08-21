@@ -6,5 +6,7 @@ class CreateTopics < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :topics, :category_id
   end
 end

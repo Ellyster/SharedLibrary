@@ -9,5 +9,7 @@ class CreateEditions < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :editions, :book_id
   end
 end

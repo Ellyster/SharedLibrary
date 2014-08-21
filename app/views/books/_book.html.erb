@@ -8,7 +8,7 @@
   <div class="col-sm-9">
     <h3>
       <%= link_to book.title, book_path(book) %>&nbsp;&nbsp;&nbsp;
-      <%= (link_to "New", books_path(recent: true), class: 'label label-danger') if book.is_recent? %>
+      <%= (link_to "New", books_path(recent: 30), class: 'label label-danger') if book.is_recent? %>
     </h3>
     <p class="text-muted"><em>Written by <%= book.authors.map{ |author| author.name }.to_sentence %></em></p>
 
@@ -22,8 +22,8 @@
         <%= link_to topic.name, books_path(filter: topic.name), class: 'label label-primary' %>
       <% end %>
 
-      <% if book.rindokus.count > 0 %>
-        <%= link_to "#{book.rindokus.last.year} - #{book.rindokus.last.semester}", book_path(book), class: 'label label-success' %>
+      <% book.rindokus.last(1).each do |rindoku| %>
+        <%= link_to "#{rindoku.year} - #{rindoku.semester}", book_path(book), class: 'label label-success' %>
       <% end %>
     </span>
   </div>

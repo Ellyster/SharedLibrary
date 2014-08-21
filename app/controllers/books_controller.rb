@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.includes(:authors, :editions, :topics, :rindokus).search(params[:keyword]).filter(params[:filter]).recent(params[:recent])
+    @books = Book.includes(:authors, :editions, :topics, :rindokus).search(params[:keyword]).filter(params[:filter]).language(params[:language]).recent(params[:recent])
     @categories = Category.includes(:topics).all
   end
 

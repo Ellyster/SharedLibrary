@@ -9,6 +9,7 @@ class Book < ActiveRecord::Base
 
   default_scope ->{order 'title ASC'}
   scope :filter, ->(topic_name){joins(:topics).where('topics.name = ?', topic_name) if topic_name}
+  scope :language, ->(language_name){joins(:language).where('languages.name = ?', language_name) if language_name}
   scope :recent, ->(days_amount){where('created_at >= ?', days_amount.to_i.days.ago) if days_amount}
 
   before_save :set_keywords
